@@ -34,9 +34,23 @@ df = pd.DataFrame({'one': pd.Series([1, 2, 3]),
 df
 ```
  2. 直接通过一个列表构成的字典来生成 DataFrame
- 3. 由带字典的列表生成 DataFrame
- 4. 可以基于二维数值来构建一个 DataFrame
+~~~python
+df = pd.DataFrame({'one': [1, 2, 3], 'two': [4, 5, 6]})
+df
+~~~
+ 4. 由带字典的列表生成 DataFrame
+~~~python
+df = pd.DataFrame({'one': [1, 2, 3], 'two': [4, 5, 6]}) 
+df
+~~~
+ 6. 可以基于二维数值来构建一个 DataFrame
+~~~python
+df = pd.DataFrame([{'one': 1, 'two': 4}, {'one': 2, 'two': 5}, {'one': 3, 'two': 6}]) 
+df
+~~~
+
+Series 实际上可以被初略看出是只有 1 列数据的 DataFrame。当然，这个说法不严谨，二者的核心区别仍然是 Series 没有列索引。你可以观察如下所示由 NumPy 一维随机数组生成的 Series 和 DataFrame。
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDM0NjY4NTMsNDk3ODE4ODEwXX0=
+eyJoaXN0b3J5IjpbLTEzOTA5MDMxMDgsNDk3ODE4ODEwXX0=
 -->

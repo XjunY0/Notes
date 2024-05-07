@@ -25,7 +25,12 @@ pandas.DataFrame(data=None, index=None, columns=None)
 -   二维或者结构化的 `numpy.ndarray`。
 -   一个 Series 或者另一个 DataFrame。
 
-可以有三种方式创建一个
+**可以有四种种方式创建一个DataFrame：**
+
+ 1. 使用一个由 Series 组成的字典来构建
+ ~~~
+ 3. 
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTMyMzMyODIsNDk3ODE4ODEwXX0=
+eyJoaXN0b3J5IjpbLTE3MTI4NTA2NjUsNDk3ODE4ODEwXX0=
 -->

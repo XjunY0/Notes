@@ -51,6 +51,12 @@ df
 
 Series 实际上可以被初略看出是只有 1 列数据的 DataFrame。当然，这个说法不严谨，二者的核心区别仍然是 Series 没有列索引。你可以观察如下所示由 NumPy 一维随机数组生成的 Series 和 DataFrame。
 
+
+
+
+
+### 数据读取
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzOTA5MDMxMDgsNDk3ODE4ODEwXX0=
+eyJoaXN0b3J5IjpbMTc0MDg1Mjc0LDQ5NzgxODgxMF19
 -->

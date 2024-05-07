@@ -56,7 +56,14 @@ Series 实际上可以被初略看出是只有 1 列数据的 DataFrame。当然
 
 
 ### 数据读取
+读取数据 CSV 文件的方法是 `pandas.read_csv()`，你可以直接传入一个相对路径，或者是网络 URL。
 
+```python
+df = pd.read_csv("https://labfile.oss.aliyuncs.com/courses/906/los_census.csv")
+df
+```
+
+由于 CSV 存储时是一个二维的表格，那么 Pandas 会自动将其读取为 DataFrame 类型。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc0MDg1Mjc0LDQ5NzgxODgxMF19
+eyJoaXN0b3J5IjpbMTAzNTM2NzMxNSw0OTc4MTg4MTBdfQ==
 -->

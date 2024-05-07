@@ -64,6 +64,13 @@ df
 ```
 
 由于 CSV 存储时是一个二维的表格，那么 Pandas 会自动将其读取为 DataFrame 类型。
+
+`pd.read_` 前缀开始的方法还可以读取各式各样的数据文件，且支持连接数据库。这里，我们不再依次赘述，你可以阅读 [_官方文档相应章节_](https://pandas.pydata.org/pandas-docs/stable/reference/io.html) 熟悉这些方法以及搞清楚这些方法包含的参数。
+
+
+#### 基本操作
+
+通过上面的内容，我们已经知道一个 DataFrame 结构大致由 3 部分组成，它们分别是列名称、索引和数据。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAzNTM2NzMxNSw0OTc4MTg4MTBdfQ==
+eyJoaXN0b3J5IjpbLTU4NjM1MjA4OSw0OTc4MTg4MTBdfQ==
 -->

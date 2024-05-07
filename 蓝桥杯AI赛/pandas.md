@@ -28,9 +28,15 @@ pandas.DataFrame(data=None, index=None, columns=None)
 **可以有四种种方式创建一个DataFrame：**
 
  1. 使用一个由 Series 组成的字典来构建
- ~~~
- 3. 
+```python
+df = pd.DataFrame({'one': pd.Series([1, 2, 3]),
+                   'two': pd.Series([4, 5, 6])})
+df
+```
+ 2. 直接通过一个列表构成的字典来生成 DataFrame
+ 3. 由带字典的列表生成 DataFrame
+ 4. 可以基于二维数值来构建一个 DataFrame
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MTI4NTA2NjUsNDk3ODE4ODEwXX0=
+eyJoaXN0b3J5IjpbLTE1MDM0NjY4NTMsNDk3ODE4ODEwXX0=
 -->

@@ -383,7 +383,149 @@ keras.layers.GlobalMaxPooling1D(data_format='channels_last')
     -   由于池化层对局部区域进行操作，它可以使网络对输入图像的小幅度平移保持不变（即输入图像稍微移动时，特征图不会发生显著变化）。
     -   这使得模型对输入的变化更为鲁棒。
 
+### RNN
 
+```py
+keras.layers.RNN(cell, return_sequences=False, 
+return_state=False, go_backwards=False, stateful=False, 
+unroll=False)
+```
+
+循环神经网络层基类。
+
+**参数**
+
+-   **cell**: 一个 RNN 单元实例。RNN 单元是一个具有以下几项的类：
+    
+    -   一个 `call(input_at_t, states_at_t)` 方法， 它返回 `(output_at_t, states_at_t_plus_1)`。 单元的调用方法也可以采引入可选参数 `constants`， 详见下面的小节「关于给 RNN 传递外部常量的说明」。
+    -   一个 `state_size` 属性。这可以是单个整数（单个状态）， 在这种情况下，它是循环层状态的大小（应该与单元输出的大小相同）。 这也可以是整数表示的列表/元组（每个状态一个大小）。
+    -   一个 `output_size` 属性。 这可以是单个整数或者是一个 TensorShape， 它表示输出的尺寸。出于向后兼容的原因，如果此属性对于当前单元不可用， 则该值将由 `state_size` 的第一个元素推断。
+    
+    `cell` 也可能是 RNN 单元实例的列表，在这种情况下，RNN 的单元将堆叠在另一个单元上，实现高效的堆叠 RNN。
+    
+-   **return_sequences**: 布尔值。是返回输出序列中的最后一个输出，还是全部序列。
+    
+-   **return_state**: 布尔值。除了输出之外是否返回最后一个状态。
+-   **go_backwards**: 布尔值 (默认 False)。 如果为 True，则向后处理输入序列并返回相反的序列。
+-   **stateful**: 布尔值 (默认 False)。 如果为 True，则批次中索引 i 处的每个样品的最后状态将用作下一批次中索引 i 样品的初始状态。
+-   **unroll**: 布尔值 (默认 False)。 如果为 True，则网络将展开，否则将使用符号循环。 展开可以加速 RNN，但它往往会占用更多的内存。 展开只适用于短序列。
+-   **input_dim**: 输入的维度（整数）。 将此层用作模型中的第一层时，此参数（或者，关键字参数 `input_shape`）是必需的。
+-   **input_length**: 输入序列的长度，在恒定时指定。 如果你要在上游连接 `Flatten` 和 `Dense` 层， 则需要此参数（如果没有它，无法计算全连接输出的尺寸）。 请注意，如果循环神经网络层不是模型中的第一层， 则需要在第一层的层级指定输入长度（例如，通过 `input_shape` 参数）。
+
+**输入尺寸**
+
+3D 张量，尺寸为 `(batch_size, timesteps, input_dim)`。
+
+**输出尺寸**
+
+-   如果 `return_state`：返回张量列表。 第一个张量为输出。剩余的张量为最后的状态， 每个张量的尺寸为 `(batch_size, units)`。例如，对于 RNN/GRU，状态张量数目为 1，对 LSTM 为 2。
+-   如果 `return_sequences`：返回 3D 张量， 尺寸为 `(batch_size, timesteps, units)`。
+-   否则，返回尺寸为 `(batch_size, units)` 的 2D 张量。
+
+**Masking**
+
+该层支持以可变数量的时间步对输入数据进行 masking。 要将 masking 引入你的数据，请使用 [Embedding](https://keras-zh.readthedocs.io/layers/embeddings/) 层， 并将 `mask_zero` 参数设置为 `True`。
+
+**关于在 RNN 中使用「状态（statefulness）」的说明**
+
+你可以将 RNN 层设置为 `stateful`（有状态的）， 这意味着针对一个批次的样本计算的状态将被重新用作下一批样本的初始状态。 这假定在不同连续批次的样品之间有一对一的映射。
+
+为了使状态有效：
+
+-   在层构造器中指定 `stateful=True`。
+-   为你的模型指定一个固定的批次大小， 如果是顺序模型，为你的模型的第一层传递一个 `batch_input_shape=(...)` 参数。
+-   为你的模型指定一个固定的批次大小， 如果是顺序模型，为你的模型的第一层传递一个 `batch_input_shape=(...)`。 如果是带有 1 个或多个 Input 层的函数式模型，为你的模型的所有第一层传递一个 `batch_shape=(...)`。 这是你的输入的预期尺寸，_包括批量维度_。 它应该是整数的元组，例如 `(32, 10, 100)`。
+-   在调用 `fit()` 是指定 `shuffle=False`。
+
+要重置模型的状态，请在特定图层或整个模型上调用 `.reset_states()`。
+
+**关于指定 RNN 初始状态的说明**
+
+您可以通过使用关键字参数 `initial_state` 调用它们来符号化地指定 RNN 层的初始状态。 `initial_state` 的值应该是表示 RNN 层初始状态的张量或张量列表。
+
+您可以通过调用带有关键字参数 `states` 的 `reset_states` 方法来数字化地指定 RNN 层的初始状态。 `states` 的值应该是一个代表 RNN 层初始状态的 Numpy 数组或者 Numpy 数组列表。
+
+**关于给 RNN 传递外部常量的说明**
+
+你可以使用 `RNN.__call__`（以及 `RNN.call`）的 `constants` 关键字参数将「外部」常量传递给单元。 这要求 `cell.call` 方法接受相同的关键字参数 `constants`。 这些常数可用于调节附加静态输入（不随时间变化）上的单元转换，也可用于注意力机制。
+
+**示例**
+
+```
+# 首先，让我们定义一个 RNN 单元，作为网络层子类。
+
+class MinimalRNNCell(keras.layers.Layer):
+
+    def __init__(self, units, **kwargs):
+        self.units = units
+        self.state_size = units
+        super(MinimalRNNCell, self).__init__(**kwargs)
+
+    def build(self, input_shape):
+        self.kernel = self.add_weight(shape=(input_shape[-1], self.units),
+                                      initializer='uniform',
+                                      name='kernel')
+        self.recurrent_kernel = self.add_weight(
+            shape=(self.units, self.units),
+            initializer='uniform',
+            name='recurrent_kernel')
+        self.built = True
+
+    def call(self, inputs, states):
+        prev_output = states[0]
+        h = K.dot(inputs, self.kernel)
+        output = h + K.dot(prev_output, self.recurrent_kernel)
+        return output, [output]
+
+# 让我们在 RNN 层使用这个单元：
+
+cell = MinimalRNNCell(32)
+x = keras.Input((None, 5))
+layer = RNN(cell)
+y = layer(x)
+
+# 以下是如何使用单元格构建堆叠的 RNN的方法：
+
+cells = [MinimalRNNCell(32), MinimalRNNCell(64)]
+x = keras.Input((None, 5))
+layer = RNN(cells)
+y = layer(x)
+```
+
+----------
+
+[[source]](https://github.com/keras-team/keras/blob/master/keras/layers/recurrent.py#L947)
+
+### SimpleRNN
+
+```
+keras.layers.SimpleRNN(units, activation='tanh', use_bias=True, kernel_initializer='glorot_uniform', recurrent_initializer='orthogonal', bias_initializer='zeros', kernel_regularizer=None, recurrent_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, recurrent_constraint=None, bias_constraint=None, dropout=0.0, recurrent_dropout=0.0, return_sequences=False, return_state=False, go_backwards=False, stateful=False, unroll=False)
+```
+
+全连接的 RNN，其输出将被反馈到输入。
+
+**参数**
+
+-   **units**: 正整数，输出空间的维度。
+-   **activation**: 要使用的激活函数 (详见 [activations](https://keras-zh.readthedocs.io/activations/))。 默认：双曲正切（`tanh`）。 如果传入 `None`，则不使用激活函数 (即 线性激活：`a(x) = x`)。
+-   **use_bias**: 布尔值，该层是否使用偏置向量。
+-   **kernel_initializer**: `kernel` 权值矩阵的初始化器， 用于输入的线性转换 (详见 [initializers](https://keras-zh.readthedocs.io/initializers/))。
+-   **recurrent_initializer**: `recurrent_kernel` 权值矩阵 的初始化器，用于循环层状态的线性转换 (详见 [initializers](https://keras-zh.readthedocs.io/initializers/))。
+-   **bias_initializer**:偏置向量的初始化器 (详见[initializers](https://keras-zh.readthedocs.io/initializers/)).
+-   **kernel_regularizer**: 运用到 `kernel` 权值矩阵的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **recurrent_regularizer**: 运用到 `recurrent_kernel` 权值矩阵的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **bias_regularizer**: 运用到偏置向量的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **activity_regularizer**: 运用到层输出（它的激活值）的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **kernel_constraint**: 运用到 `kernel` 权值矩阵的约束函数 (详见 [constraints](https://keras-zh.readthedocs.io/constraints/))。
+-   **recurrent_constraint**: 运用到 `recurrent_kernel` 权值矩阵的约束函数 (详见 [constraints](https://keras-zh.readthedocs.io/constraints/))。
+-   **bias_constraint**: 运用到偏置向量的约束函数 (详见 [constraints](https://keras-zh.readthedocs.io/constraints/))。
+-   **dropout**: 在 0 和 1 之间的浮点数。 单元的丢弃比例，用于输入的线性转换。
+-   **recurrent_dropout**: 在 0 和 1 之间的浮点数。 单元的丢弃比例，用于循环层状态的线性转换。
+-   **return_sequences**: 布尔值。是返回输出序列中的最后一个输出，还是全部序列。
+-   **return_state**: 布尔值。除了输出之外是否返回最后一个状态。
+-   **go_backwards**: 布尔值 (默认 False)。 如果为 True，则向后处理输入序列并返回相反的序列。
+-   **stateful**: 布尔值 (默认 False)。 如果为 True，则批次中索引 i 处的每个样品 的最后状态将用作下一批次中索引 i 样品的初始状态。
+-   **unroll**: 布尔值 (默认 False)。 如果为 True，则网络将展开，否则将使用符号循环。 展开可以加速 RNN，但它往往会占用更多的内存。 展开只适用于短序列。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODU2OTcyMDQzXX0=
+eyJoaXN0b3J5IjpbMjEwODExMDUzMF19
 -->

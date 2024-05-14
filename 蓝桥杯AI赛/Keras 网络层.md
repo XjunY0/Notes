@@ -202,8 +202,9 @@ padding='valid', data_format='channels_last')
 
 ### MaxPooling2D
 
-```
-keras.layers.MaxPooling2D(pool_size=(2, 2), strides=None, padding='valid', data_format=None)
+```python
+keras.layers.MaxPooling2D(pool_size=(2, 2), strides=None, 
+padding='valid', data_format=None)
 ```
 
 对于空间数据的最大池化。
@@ -254,5 +255,5 @@ keras.layers.MaxPooling3D(pool_size=(2, 2, 2), strides=None, padding='valid', da
 -   如果 `data_format='channels_last'`: 尺寸是 `(batch_size, pooled_dim1, pooled_dim2, pooled_dim3, channels)` 的 5D 张量
 -   如果 `data_format='channels_first'`: 尺寸是 `(batch_size, channels, pooled_dim1, pooled_dim2, pooled_dim3)` 的 5D 张量
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU1MjgxNDQ3Ml19
+eyJoaXN0b3J5IjpbMTM3ODk2ODIxOF19
 -->

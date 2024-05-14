@@ -368,11 +368,23 @@ model.compile(optimizer='rmsprop',
 model.fit([data_a, data_b], labels, epochs=10)
 ```
 
+
+`keras.layers.concatenate` 
+是 Keras 中用于将多个张量（通常是层的输出）沿指定轴连接的一个层。它在构建需要将多个输入或多个层的输出连接起来的复杂模型时非常有用。
+
+#### 功能
+
+-   **连接多个张量**：`concatenate` 层可以将多个张量沿指定轴进行连接。常见的用途包括将多个特征组合成一个整体，或将多通道的特征图组合在一起。
+
+#### 参数
+
+-   **`inputs`**：这是一个张量列表，需要连接的张量。
+-   **`axis`**：这是沿哪个轴进行连接。默认值是 -1，表示最后一个轴。
+
+
 让我们暂停一会，看看如何读取共享层的输出或输出尺寸。
-
-
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM3NjUzMzI0NywxOTE1MTkwMTc5LC0yNz
-QyNTU0NDQsOTE1MDAwMjk0LC0xNjkxMTIzODU3LDE4MTA0Mjkx
-NywtMjA4ODc0NjYxMl19
+eyJoaXN0b3J5IjpbNjQ3ODE3MTc0LDE5MTUxOTAxNzksLTI3ND
+I1NTQ0NCw5MTUwMDAyOTQsLTE2OTExMjM4NTcsMTgxMDQyOTE3
+LC0yMDg4NzQ2NjEyXX0=
 -->

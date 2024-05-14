@@ -163,7 +163,39 @@ model.fit(data, one_hot_labels, epochs=10, batch_size=32)
 -   基于 LSTM 的字符级文本生成
 
 ...以及更多。
+
+
+# Keras 函数式 API
+
+Keras 函数式 API 是定义复杂模型（如多输出模型、有向无环图或具有共享层的模型）的方法。
+## 例一：全连接网络
+
+`Sequential` 模型可能是实现这种网络的一个更好选择，但这个例子能够帮助我们进行一些简单的理解。
+
+-   网络层的实例是可调用的，它以张量为参数，并且返回一个张量
+-   输入和输出均为张量，它们都可以用来定义一个模型（`Model`）
+-   这样的模型同 Keras 的 `Sequential` 模型一样，都可以被训练
+
+```python
+from keras.layers import Input, Dense
+from keras.models import Model
+
+# 这部分返回一个张量
+inputs = Input(shape=(784,))
+
+# 层的实例是可调用的，它以张量为参数，并且返回一个张量
+output_1 = Dense(64, activation='relu')(inputs)
+output_2 = Dense(64, activation='relu')(output_1)
+predictions = Dense(10, activation='softmax')(output_2)
+
+# 这部分创建了一个包含输入层和三个全连接层的模型
+model = Model(inputs=inputs, outputs=predictions)
+model.compile(optimizer='rmsprop',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+model.fit(data, labels)  # 开始训练
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNTc0MjAwMjEsOTE1MDAwMjk0LC0xNj
-kxMTIzODU3LDE4MTA0MjkxNywtMjA4ODc0NjYxMl19
+eyJoaXN0b3J5IjpbLTU3Njc1ODU3MSw5MTUwMDAyOTQsLTE2OT
+ExMjM4NTcsMTgxMDQyOTE3LC0yMDg4NzQ2NjEyXX0=
 -->

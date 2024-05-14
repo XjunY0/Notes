@@ -369,8 +369,10 @@ model.fit([data_a, data_b], labels, epochs=10)
 ```
 
 让我们暂停一会，看看如何读取共享层的输出或输出尺寸。
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkxNTE5MDE3OSwtMjc0MjU1NDQ0LDkxNT
-AwMDI5NCwtMTY5MTEyMzg1NywxODEwNDI5MTcsLTIwODg3NDY2
-MTJdfQ==
+eyJoaXN0b3J5IjpbMTM3NjUzMzI0NywxOTE1MTkwMTc5LC0yNz
+QyNTU0NDQsOTE1MDAwMjk0LC0xNjkxMTIzODU3LDE4MTA0Mjkx
+NywtMjA4ODc0NjYxMl19
 -->

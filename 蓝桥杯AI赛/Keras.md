@@ -195,7 +195,31 @@ model.compile(optimizer='rmsprop',
               metrics=['accuracy'])
 model.fit(data, labels)  # 开始训练
 ```
+## 所有的模型都可调用，就像网络层一样
+
+利用函数式 API，可以轻易地重用训练好的模型：可以将任何模型看作是一个层，然后通过传递一个张量来调用它。注意，在调用模型时，您不仅重用模型的_结构_，还重用了它的权重。
+
+```
+x = Input(shape=(784,))
+# 这是可行的，并且返回上面定义的 10-way softmax。
+y = model(x)
+```
+
+这种方式能允许我们快速创建可以处理_序列输入_的模型。只需一行代码，你就将图像分类模型转换为视频分类模型。
+
+```python
+from keras.layers import TimeDistributed
+
+# 输入张量是 20 个时间步的序列，
+# 每一个时间为一个 784 维的向量
+input_sequences = Input(shape=(20, 784))
+
+# 这部分将我们之前定义的模型应用于输入序列中的每个时间步。
+# 之前定义的模型的输出是一个 10-way softmax，
+# 因而下面的层的输出将是维度为 10 的 20 个向量的序列。
+processed_sequences = TimeDistributed(model)(input_sequences)
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU3Njc1ODU3MSw5MTUwMDAyOTQsLTE2OT
-ExMjM4NTcsMTgxMDQyOTE3LC0yMDg4NzQ2NjEyXX0=
+eyJoaXN0b3J5IjpbMTUzMzA1MDEyLDkxNTAwMDI5NCwtMTY5MT
+EyMzg1NywxODEwNDI5MTcsLTIwODg3NDY2MTJdfQ==
 -->

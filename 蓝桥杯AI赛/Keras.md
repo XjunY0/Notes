@@ -83,7 +83,52 @@ model.compile(optimizer='rmsprop',
               loss='binary_crossentropy',
               metrics=['accuracy', mean_pred])
 ```
+
+## 模型训练
+
+Keras 模型在输入数据和标签的 Numpy 矩阵上进行训练。为了训练一个模型，你通常会使用 `fit` 函数。[文档详见此处](https://keras-zh.readthedocs.io/models/sequential)。
+
+```python
+# 对于具有 2 个类的单输入模型（二进制分类）：
+
+model = Sequential()
+model.add(Dense(32, activation='relu', input_dim=100))
+model.add(Dense(1, activation='sigmoid'))
+model.compile(optimizer='rmsprop',
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+
+# 生成虚拟数据
+import numpy as np
+data = np.random.random((1000, 100))
+labels = np.random.randint(2, size=(1000, 1))
+
+# 训练模型，以 32 个样本为一个 batch 进行迭代
+model.fit(data, labels, epochs=10, batch_size=32)
+```
+
+```python
+# 对于具有 10 个类的单输入模型（多分类分类）：
+
+model = Sequential()
+model.add(Dense(32, activation='relu', input_dim=100))
+model.add(Dense(10, activation='softmax'))
+model.compile(optimizer='rmsprop',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# 生成虚拟数据
+import numpy as np
+data = np.random.random((1000, 100))
+labels = np.random.randint(10, size=(1000, 1))
+
+# 将标签转换为分类的 one-hot 编码
+one_hot_labels = keras.utils.to_categorical(labels, num_classes=10)
+
+# 训练模型，以 32 个样本为一个 batch 进行迭代
+model.fit(data, one_hot_labels, epochs=10, batch_size=32)
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA2NzI1MDU0LC0xNjkxMTIzODU3LDE4MT
-A0MjkxNywtMjA4ODc0NjYxMl19
+eyJoaXN0b3J5IjpbMzI3NTU1MzIsLTE2OTExMjM4NTcsMTgxMD
+QyOTE3LC0yMDg4NzQ2NjEyXX0=
 -->

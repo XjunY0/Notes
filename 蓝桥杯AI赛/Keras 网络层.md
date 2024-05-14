@@ -123,8 +123,14 @@ kernel_constraint=None, bias_constraint=None)
 
 ### Conv2D
 
-```
-keras.layers.Conv2D(filters, kernel_size, strides=(1, 1), padding='valid', data_format=None, dilation_rate=(1, 1), activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None)
+```python
+keras.layers.Conv2D(filters, kernel_size, strides=(1, 1), 
+padding='valid', data_format=None, dilation_rate=(1, 1), 
+activation=None, use_bias=True, 
+kernel_initializer='glorot_uniform', 
+bias_initializer='zeros', kernel_regularizer=None, 
+bias_regularizer=None, activity_regularizer=None, 
+kernel_constraint=None, bias_constraint=None)
 ```
 
 2D 卷积层 (例如对图像的空间卷积)。
@@ -163,5 +169,5 @@ keras.layers.Conv2D(filters, kernel_size, strides=(1, 1), padding='valid', data_
 
 由于填充的原因，`rows` 和 `cols` 值可能已更改。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI3OTk2NzAyOV19
+eyJoaXN0b3J5IjpbMTc2MTE3NjA4M119
 -->

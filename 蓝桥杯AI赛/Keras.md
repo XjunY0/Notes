@@ -141,7 +141,29 @@ model.fit(data, one_hot_labels, epochs=10, batch_size=32)
 #### 输出
 
 该函数调用生成一个形状为 `(1000, 1)` 的二维数组，其中包含 1000 行，每行包含一个随机整数（0 或 1）。
+
+`keras.utils.to_categorical` 
+是 Keras 的一个实用工具函数，用于将类别标签转换为 one-hot 编码。
+
+#### 参数
+
+-   **`labels`**：这是一个包含类别标签的数组或列表，标签通常是整数。
+-   **`num_classes`**：这是指定总的类别数。one-hot 编码后的向量长度将会是这个数值。
+
+## 示例
+
+这里有几个可以帮助你起步的例子！
+
+在 [examples](https://github.com/keras-team/keras/tree/master/examples) 目录中，你可以找到真实数据集的示例模型：
+
+-   CIFAR10 小图片分类：具有实时数据增强的卷积神经网络 (CNN)
+-   IMDB 电影评论情感分类：基于词序列的 LSTM
+-   Reuters 新闻主题分类：多层感知器 (MLP)
+-   MNIST 手写数字分类：MLP & CNN
+-   基于 LSTM 的字符级文本生成
+
+...以及更多。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE1MDAwMjk0LC0xNjkxMTIzODU3LDE4MT
-A0MjkxNywtMjA4ODc0NjYxMl19
+eyJoaXN0b3J5IjpbLTExNTc0MjAwMjEsOTE1MDAwMjk0LC0xNj
+kxMTIzODU3LDE4MTA0MjkxNywtMjA4ODc0NjYxMl19
 -->

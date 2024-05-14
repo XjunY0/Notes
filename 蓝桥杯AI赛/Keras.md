@@ -34,8 +34,10 @@ model.add(Activation('relu'))
 -   某些 2D 层，例如 `Dense`，支持通过参数 `input_dim` 指定输入尺寸，某些 3D 时序层支持 `input_dim` 和 `input_length` 参数。
 -   如果你需要为你的输入指定一个固定的 batch 大小（这对 stateful RNNs 很有用），你可以传递一个 `batch_size` 参数给一个层。如果你同时将 `batch_size=32` 和 `input_shape=(6, 8)` 传递给一个层，那么每一批输入的尺寸就为 `(32，6，8)`。
 
-`input_shape`  
+`input_shape` 参数用于指定输入张量的形状（不包括批量大小）。它是一个元组，可以包含多个维度
+`input_dim` 参数用于指定单个输入样本的特征维度
+`input_length` 参数用于指定输入序列的长度
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNTk3MDY2NjcsLTE2OTExMjM4NTcsMT
-gxMDQyOTE3LC0yMDg4NzQ2NjEyXX0=
+eyJoaXN0b3J5IjpbLTE0MDMzODcyMiwtMTY5MTEyMzg1NywxOD
+EwNDI5MTcsLTIwODg3NDY2MTJdfQ==
 -->

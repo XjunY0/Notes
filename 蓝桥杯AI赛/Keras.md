@@ -37,7 +37,53 @@ model.add(Activation('relu'))
 `input_shape` 参数用于指定输入张量的形状（不包括批量大小）。它是一个元组，可以包含多个维度
 `input_dim` 参数用于指定单个输入样本的特征维度
 `input_length` 参数用于指定输入序列的长度
+
+因此，下面的代码片段是等价的：
+
+```python
+model = Sequential()
+model.add(Dense(32, input_shape=(784,)))
+```
+
+```python
+model = Sequential()
+model.add(Dense(32, input_dim=784))
+```
+
+## 模型编译
+
+在训练模型之前，您需要配置学习过程，这是通过 `compile` 方法完成的。它接收三个参数：
+
+-   优化器 optimizer。它可以是现有优化器的字符串标识符，如 `rmsprop` 或 `adagrad`，也可以是 Optimizer 类的实例。详见：[optimizers](https://keras-zh.readthedocs.io/optimizers)。
+-   损失函数 loss，模型试图最小化的目标函数。它可以是现有损失函数的字符串标识符，如 `categorical_crossentropy` 或 `mse`，也可以是一个目标函数。详见：[losses](https://keras-zh.readthedocs.io/losses)。
+-   评估标准 metrics。对于任何分类问题，你都希望将其设置为 `metrics = ['accuracy']`。评估标准可以是现有的标准的字符串标识符，也可以是自定义的评估标准函数。详见: [metrics](https://keras-zh.readthedocs.io/metrics)。
+
+```python
+# 多分类问题
+model.compile(optimizer='rmsprop',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# 二分类问题
+model.compile(optimizer='rmsprop',
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+
+# 均方误差回归问题
+model.compile(optimizer='rmsprop',
+              loss='mse')
+
+# 自定义评估标准函数
+import keras.backend as K
+
+def mean_pred(y_true, y_pred):
+    return K.mean(y_pred)
+
+model.compile(optimizer='rmsprop',
+              loss='binary_crossentropy',
+              metrics=['accuracy', mean_pred])
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MDMzODcyMiwtMTY5MTEyMzg1NywxOD
-EwNDI5MTcsLTIwODg3NDY2MTJdfQ==
+eyJoaXN0b3J5IjpbMTA2NzI1MDU0LC0xNjkxMTIzODU3LDE4MT
+A0MjkxNywtMjA4ODc0NjYxMl19
 -->

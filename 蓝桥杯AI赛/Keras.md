@@ -107,6 +107,8 @@ labels = np.random.randint(2, size=(1000, 1))
 model.fit(data, labels, epochs=10, batch_size=32)
 ```
 
+
+
 ```python
 # 对于具有 10 个类的单输入模型（多分类分类）：
 
@@ -128,7 +130,18 @@ one_hot_labels = keras.utils.to_categorical(labels, num_classes=10)
 # 训练模型，以 32 个样本为一个 batch 进行迭代
 model.fit(data, one_hot_labels, epochs=10, batch_size=32)
 ```
+`np.random.randint(10, size=(1000, 1))`
+是 NumPy 的随机模块 `np.random` 中的一个函数，用于生成指定范围内的随机整数。
+
+#### 参数
+
+-   **`2`**：这是随机整数生成的范围上限（不包括 2），即生成的随机整数将会是 0 或 1。
+-   **`size=(1000, 1)`**：这是生成数组的形状参数，表示生成一个形状为 `(1000, 1)` 的二维数组。
+
+#### 输出
+
+该函数调用生成一个形状为 `(1000, 1)` 的二维数组，其中包含 1000 行，每行包含一个随机整数（0 或 1）。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzI3NTU1MzIsLTE2OTExMjM4NTcsMTgxMD
-QyOTE3LC0yMDg4NzQ2NjEyXX0=
+eyJoaXN0b3J5IjpbOTE1MDAwMjk0LC0xNjkxMTIzODU3LDE4MT
+A0MjkxNywtMjA4ODc0NjYxMl19
 -->

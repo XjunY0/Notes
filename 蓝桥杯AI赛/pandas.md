@@ -71,6 +71,44 @@ df
 #### 基本操作
 
 通过上面的内容，我们已经知道一个 DataFrame 结构大致由 3 部分组成，它们分别是列名称、索引和数据。
+![输入图片说明](/imgs/2024-05-07/2IOH1eC0IgwMSCSj.png)
+Pandas 提供了 `head()` 和 `tail()` 方法，它可以帮助我们只预览一小块数据。
+
+```python
+df.head()  # 默认显示前 5 条
+```
+
+```python
+df.tail(7)  # 指定显示后 7 条
+```
+
+Pandas 还提供了统计和描述性方法，方便你从宏观的角度去了解数据集。`describe()` 相当于对数据集进行概览，会输出该数据集每一列数据的计数、最大值、最小值等。
+
+```python
+df.describe()
+```
+
+Pandas 基于 NumPy 开发，所以任何时候你都可以通过 `.values` 将 DataFrame 转换为 NumPy 数组。
+
+```python
+df.values
+```
+
+这也就说明了，你可以同时使用 Pandas 和 NumPy 提供的 API 对同一数据进行操作，并在二者之间进行随意转换。这就是一个非常灵活的工具生态圈。
+
+除了 `.values`，DataFrame 支持的常见属性可以通过 [_官方文档相应章节_](https://pandas.pydata.org/pandas-docs/stable/reference/frame.html#attributes-and-underlying-data) 查看。其中常用的有：
+
+```python
+df.index  # 查看索引
+```
+
+```python
+df.columns  # 查看列名
+```
+
+```python
+df.shape  # 查看形状
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU4NjM1MjA4OSw0OTc4MTg4MTBdfQ==
+eyJoaXN0b3J5IjpbLTE2MDMyNDY0ODAsNDk3ODE4ODEwXX0=
 -->

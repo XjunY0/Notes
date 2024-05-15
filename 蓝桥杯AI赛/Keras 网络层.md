@@ -453,7 +453,7 @@ unroll=False)
 
 **示例**
 
-```
+```py
 # 首先，让我们定义一个 RNN 单元，作为网络层子类。
 
 class MinimalRNNCell(keras.layers.Layer):
@@ -500,8 +500,16 @@ y = layer(x)
 
 ### SimpleRNN
 
-```
-keras.layers.SimpleRNN(units, activation='tanh', use_bias=True, kernel_initializer='glorot_uniform', recurrent_initializer='orthogonal', bias_initializer='zeros', kernel_regularizer=None, recurrent_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, recurrent_constraint=None, bias_constraint=None, dropout=0.0, recurrent_dropout=0.0, return_sequences=False, return_state=False, go_backwards=False, stateful=False, unroll=False)
+```py
+keras.layers.SimpleRNN(units, activation='tanh', 
+use_bias=True, kernel_initializer='glorot_uniform', 
+recurrent_initializer='orthogonal', bias_initializer='zeros', 
+kernel_regularizer=None, recurrent_regularizer=None, 
+bias_regularizer=None, activity_regularizer=None, 
+kernel_constraint=None, recurrent_constraint=None, 
+bias_constraint=None, dropout=0.0, recurrent_dropout=0.0, 
+return_sequences=False, return_state=False, 
+go_backwards=False, stateful=False, unroll=False)
 ```
 
 全连接的 RNN，其输出将被反馈到输入。
@@ -529,6 +537,6 @@ keras.layers.SimpleRNN(units, activation='tanh', use_bias=True, kernel_initializ
 -   **stateful**: 布尔值 (默认 False)。 如果为 True，则批次中索引 i 处的每个样品 的最后状态将用作下一批次中索引 i 样品的初始状态。
 -   **unroll**: 布尔值 (默认 False)。 如果为 True，则网络将展开，否则将使用符号循环。 展开可以加速 RNN，但它往往会占用更多的内存。 展开只适用于短序列。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEwNTMzODg4LDg1Njk3MjA0MywyMTA4MT
+eyJoaXN0b3J5IjpbNzEyNjE4MDA4LDg1Njk3MjA0MywyMTA4MT
 EwNTMwXX0=
 -->

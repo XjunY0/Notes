@@ -48,7 +48,38 @@ assert np.array_equal(y,
                       np.array([[10], [11]]))
 ```
 
+### pad_sequences
 
+```python
+keras.preprocessing.sequence.pad_sequences(sequences, maxlen=None, dtype='int32', padding='pre', truncating='pre', value=0.0)
+```
+
+将多个序列截断或补齐为相同长度。
+
+该函数将一个 `num_samples` 的序列（整数列表）转化为一个 2D Numpy 矩阵，其尺寸为 `(num_samples, num_timesteps)`。 `num_timesteps` 要么是给定的 `maxlen` 参数，要么是最长序列的长度。
+
+比 `num_timesteps` 短的序列将在末端以 `value` 值补齐。
+
+比 `num_timesteps` 长的序列将会被截断以满足所需要的长度。补齐或截断发生的位置分别由参数 `pading` 和 `truncating` 决定。
+
+向前补齐为默认操作。
+
+**参数**
+
+-   **sequences**: 列表的列表，每一个元素是一个序列。
+-   **maxlen**: 整数，所有序列的最大长度。
+-   **dtype**: 输出序列的类型。 要使用可变长度字符串填充序列，可以使用 `object`。
+-   **padding**: 字符串，'pre' 或 'post' ，在序列的前端补齐还是在后端补齐。
+-   **truncating**: 字符串，'pre' 或 'post' ，移除长度大于 `maxlen` 的序列的值，要么在序列前端截断，要么在后端。
+-   **value**: 浮点数，表示用来补齐的值。
+
+**返回**
+
+-   **x**: Numpy 矩阵，尺寸为 `(len(sequences), maxlen)`。
+
+**异常**
+
+-   ValueError: 如果截断或补齐的值无效，或者序列条目的形状无效。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODI2NDkwMzZdfQ==
+eyJoaXN0b3J5IjpbMTQ0MTUxOTQwOF19
 -->

@@ -47,6 +47,8 @@ assert np.array_equal(x,
 assert np.array_equal(y,
                       np.array([[10], [11]]))
 ```
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMzMjU0MDI0OF19
+eyJoaXN0b3J5IjpbLTE2ODI2NDkwMzZdfQ==
 -->

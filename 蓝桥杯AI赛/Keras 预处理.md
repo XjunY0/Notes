@@ -80,6 +80,9 @@ keras.preprocessing.sequence.pad_sequences(sequences, maxlen=None, dtype='int32'
 **异常**
 
 -   ValueError: 如果截断或补齐的值无效，或者序列条目的形状无效。
+
+
+`skipgrams` 是一种用于生成 Skip-gram 模型训练数据的方法。Skip-gram 模型通过预测上下文词来学习词向量。通过使用 Keras 的 `skipgrams` 函数，可以轻松地生成 (target_word, context_word) 对，用于训练神经网络模型，如 Word2Vec。这种技术在自然语言处理任务中广泛应用，用于捕捉词语之间的语义关系。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ0MTUxOTQwOF19
+eyJoaXN0b3J5IjpbNjI0NzMwNTYxLDE0NDE1MTk0MDhdfQ==
 -->

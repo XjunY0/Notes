@@ -706,7 +706,65 @@ go_backwards=False, stateful=False, unroll=False)
 -   [Learning to forget: Continual prediction with LSTM](http://www.mitpressjournals.org/doi/pdf/10.1162/089976600300015015)
 -   [Supervised sequence labeling with recurrent neural networks](http://www.cs.toronto.edu/~graves/preprint.pdf)
 -   [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
+
+
+----------
+
+[[source]](https://github.com/keras-team/keras/blob/master/keras/layers/embeddings.py#L16)
+
+### Embedding
+
+```py
+keras.layers.Embedding(input_dim, output_dim, 
+embeddings_initializer='uniform', 
+embeddings_regularizer=None, activity_regularizer=None, 
+embeddings_constraint=None, mask_zero=False, 
+input_length=None)
+```
+
+将正整数（索引值）转换为固定尺寸的稠密向量。 例如： [[4], [20]] -> [[0.25, 0.1], [0.6, -0.2]]
+
+该层只能用作模型中的第一层。
+
+**示例**
+
+```py
+model = Sequential()
+model.add(Embedding(1000, 64, input_length=10))
+# 模型将输入一个大小为 (batch, input_length) 的整数矩阵。
+# 输入中最大的整数（即词索引）不应该大于 999 （词汇表大小）
+# 现在 model.output_shape == (None, 10, 64)，其中 None 是 batch 的维度。
+
+input_array = np.random.randint(1000, size=(32, 10))
+
+model.compile('rmsprop', 'mse')
+output_array = model.predict(input_array)
+assert output_array.shape == (32, 10, 64)
+```
+
+**参数**
+
+-   **input_dim**: int > 0。词汇表大小， 即，最大整数 index + 1。
+-   **output_dim**: int >= 0。词向量的维度。
+-   **embeddings_initializer**: `embeddings` 矩阵的初始化方法 (详见 [initializers](https://keras-zh.readthedocs.io/initializers/))。
+-   **embeddings_regularizer**: `embeddings` matrix 的正则化方法 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **activity_regularizer**: 应用到层输出的正则化函数 (它的 "activation")。 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **embeddings_constraint**: `embeddings` matrix 的约束函数 (详见 [constraints](https://keras-zh.readthedocs.io/constraints/))。
+-   **mask_zero**: 是否把 0 看作为一个应该被遮蔽的特殊的 "padding" 值。 这对于可变长的[循环神经网络层](https://keras-zh.readthedocs.io/layers/recurrent/) 十分有用。 如果设定为 `True`，那么接下来的所有层都必须支持 masking，否则就会抛出异常。 如果 mask_zero 为 `True`，作为结果，索引 0 就不能被用于词汇表中 （input_dim 应该与 vocabulary + 1 大小相同）。
+-   **input_length**: 输入序列的长度，当它是固定的时。 如果你需要连接 `Flatten` 和 `Dense` 层，则这个参数是必须的 （没有它，dense 层的输出尺寸就无法计算）。
+
+**输入尺寸**
+
+尺寸为 `(batch_size, sequence_length)` 的 2D 张量。
+
+**输出尺寸**
+
+尺寸为 `(batch_size, sequence_length, output_dim)` 的 3D 张量。
+
+**参考文献**
+
+-   [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTg3NDY0MzA2LDcxMjYxODAwOCw4NTY5Nz
-IwNDMsMjEwODExMDUzMF19
+eyJoaXN0b3J5IjpbLTE1NzI5ODc1NzAsNzEyNjE4MDA4LDg1Nj
+k3MjA0MywyMTA4MTEwNTMwXX0=
 -->

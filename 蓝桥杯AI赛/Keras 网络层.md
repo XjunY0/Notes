@@ -598,8 +598,18 @@ go_backwards=False, stateful=False, unroll=False)
 
 ### GRU
 
-```
-keras.layers.GRU(units, activation='tanh', recurrent_activation='sigmoid', use_bias=True, kernel_initializer='glorot_uniform', recurrent_initializer='orthogonal', bias_initializer='zeros', kernel_regularizer=None, recurrent_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, recurrent_constraint=None, bias_constraint=None, dropout=0.0, recurrent_dropout=0.0, implementation=2, return_sequences=False, return_state=False, go_backwards=False, stateful=False, unroll=False, reset_after=False)
+```py
+keras.layers.GRU(units, activation='tanh', 
+recurrent_activation='sigmoid', use_bias=True, 
+kernel_initializer='glorot_uniform', 
+recurrent_initializer='orthogonal', bias_initializer='zeros', 
+kernel_regularizer=None, recurrent_regularizer=None, 
+bias_regularizer=None, activity_regularizer=None, 
+kernel_constraint=None, recurrent_constraint=None, 
+bias_constraint=None, dropout=0.0, recurrent_dropout=0.0, 
+implementation=2, return_sequences=False, return_state=False, 
+go_backwards=False, stateful=False, unroll=False, 
+reset_after=False)
 ```
 
 门限循环单元网络（Gated Recurrent Unit） - Cho et al. 2014.
@@ -697,6 +707,6 @@ go_backwards=False, stateful=False, unroll=False)
 -   [Supervised sequence labeling with recurrent neural networks](http://www.cs.toronto.edu/~graves/preprint.pdf)
 -   [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI5Nzg3MDgyOSw3MTI2MTgwMDgsODU2OT
-cyMDQzLDIxMDgxMTA1MzBdfQ==
+eyJoaXN0b3J5IjpbNTg3NDY0MzA2LDcxMjYxODAwOCw4NTY5Nz
+IwNDMsMjEwODExMDUzMF19
 -->

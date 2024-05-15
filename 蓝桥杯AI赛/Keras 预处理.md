@@ -83,6 +83,39 @@ keras.preprocessing.sequence.pad_sequences(sequences, maxlen=None, dtype='int32'
 
 
 `skipgrams` 是一种用于生成 Skip-gram 模型训练数据的方法。Skip-gram 模型通过预测上下文词来学习词向量。通过使用 Keras 的 `skipgrams` 函数，可以轻松地生成 (target_word, context_word) 对，用于训练神经网络模型，如 Word2Vec。这种技术在自然语言处理任务中广泛应用，用于捕捉词语之间的语义关系。
+
+
+
+### make_sampling_table
+
+```py
+keras.preprocessing.sequence.make_sampling_table(size, sampling_factor=1e-05)
+```
+
+生成一个基于单词的概率采样表。
+
+用来生成 `skipgrams` 的 `sampling_table` 参数。`sampling_table[i]` 是数据集中第 i 个最常见词的采样概率（出于平衡考虑，出现更频繁的词应该被更少地采样）。
+
+采样概率根据 word2vec 中使用的采样分布生成：
+
+```py
+p(word) = (min(1, sqrt(word_frequency / sampling_factor) /
+    (word_frequency / sampling_factor)))
+```
+
+我们假设单词频率遵循 Zipf 定律（s=1），来导出 frequency(rank) 的数值近似：
+
+`frequency(rank) ~ 1/(rank * (log(rank) + gamma) + 1/2 - 1/(12*rank))`，其中 `gamma` 为 Euler-Mascheroni 常量。
+
+**参数**
+
+-   **size**: 整数，可能采样的单词数量。
+-   **sampling_factor**: word2vec 公式中的采样因子。
+
+**返回**
+
+一个长度为 `size` 大小的 1D Numpy 数组，其中第 i 项是排名为 i 的单词的采样概率。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjI0NzMwNTYxLDE0NDE1MTk0MDhdfQ==
+eyJoaXN0b3J5IjpbLTQwNzI5NTY5Miw2MjQ3MzA1NjEsMTQ0MT
+UxOTQwOF19
 -->

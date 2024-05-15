@@ -31,6 +31,14 @@ keras.preprocessing.text.Tokenizer(num_words=None,
 
 `0` 是不会被分配给任何单词的保留索引。
 
+示例：
+~~~python
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts(news_train + news_test)
+X_train = tokenizer.texts_to_sequences(news_train)
+X_test = tokenizer.texts_to_sequences(news_test)
+~~~
+
 
 ### hashing_trick
 
@@ -113,5 +121,5 @@ keras.preprocessing.text.text_to_word_sequence(text,
 
 词或标记的列表。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDM1MTY2MDA0LDQ0MDkwNTYxOV19
+eyJoaXN0b3J5IjpbMTQ2MTU1MTE2LDQ0MDkwNTYxOV19
 -->

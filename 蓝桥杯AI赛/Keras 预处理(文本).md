@@ -30,6 +30,88 @@ keras.preprocessing.text.Tokenizer(num_words=None,
 默认情况下，删除所有标点符号，将文本转换为空格分隔的单词序列（单词可能包含 `'` 字符）。 这些序列然后被分割成标记列表。然后它们将被索引或向量化。
 
 `0` 是不会被分配给任何单词的保留索引。
+
+
+### hashing_trick
+
+```py
+keras.preprocessing.text.hashing_trick(text, 
+                                       n, 
+                                       hash_function=None, 
+                                       filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n', 
+                                       lower=True, 
+                                       split=' ')
+```
+
+将文本转换为固定大小散列空间中的索引序列。
+
+**参数**
+
+-   **text**: 输入文本（字符串）。
+-   **n**: 散列空间维度。
+-   **hash_function**: 默认为 python 散列函数，可以是 'md5' 或任意接受输入字符串并返回整数的函数。注意 'hash' 不是稳定的散列函数，所以它在不同的运行中不一致，而 'md5' 是一个稳定的散列函数。
+-   **filters**: 要过滤的字符列表（或连接），如标点符号。默认：``!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\t\n``，包含基本标点符号，制表符和换行符。
+-   **lower**: 布尔值。是否将文本转换为小写。
+-   **split**: 字符串。按该字符串切割文本。
+
+**返回**
+
+整数词索引列表（唯一性无法保证）。
+
+`0` 是不会被分配给任何单词的保留索引。
+
+由于哈希函数可能发生冲突，可能会将两个或更多字分配给同一索引。 碰撞的[概率](https://en.wikipedia.org/wiki/Birthday_problem#Probability_table)与散列空间的维度和不同对象的数量有关。
+
+
+### one_hot
+
+```py
+keras.preprocessing.text.one_hot(text, 
+                                 n, 
+                                 filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n', 
+                                 lower=True, 
+                                 split=' ')
+```
+
+One-hot 将文本编码为大小为 n 的单词索引列表。
+
+这是 `hashing_trick` 函数的一个封装， 使用 `hash` 作为散列函数；单词索引映射无保证唯一性。
+
+**参数**
+
+-   **text**: 输入文本（字符串）。
+-   **n**: 整数。词汇表尺寸。
+-   **filters**: 要过滤的字符列表（或连接），如标点符号。默认：``!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\t\n``，包含基本标点符号，制表符和换行符。
+-   **lower**: 布尔值。是否将文本转换为小写。
+-   **split**: 字符串。按该字符串切割文本。
+
+**返回**
+
+[1, n] 之间的整数列表。每个整数编码一个词（唯一性无法保证）。
+
+
+
+### text_to_word_sequence
+
+```py
+keras.preprocessing.text.text_to_word_sequence(text, 
+                                               filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n', 
+                                               lower=True, 
+                                               split=' ')
+```
+
+将文本转换为单词（或标记）的序列。
+
+**参数**
+
+-   **text**: 输入文本（字符串）。
+-   **filters**: 要过滤的字符列表（或连接），如标点符号。默认：``!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\t\n``，包含基本标点符号，制表符和换行符。
+-   **lower**: 布尔值。是否将文本转换为小写。
+-   **split**: 字符串。按该字符串切割文本。
+
+**返回**
+
+词或标记的列表。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzNjExNzg1Nyw0NDA5MDU2MTldfQ==
+eyJoaXN0b3J5IjpbNDM1MTY2MDA0LDQ0MDkwNTYxOV19
 -->

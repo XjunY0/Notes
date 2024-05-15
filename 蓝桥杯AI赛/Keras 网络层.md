@@ -591,7 +591,112 @@ go_backwards=False, stateful=False, unroll=False)
 -   **go_backwards**: 布尔值 (默认 False)。 如果为 True，则向后处理输入序列并返回相反的序列。
 -   **stateful**: 布尔值 (默认 False)。 如果为 True，则批次中索引 i 处的每个样品 的最后状态将用作下一批次中索引 i 样品的初始状态。
 -   **unroll**: 布尔值 (默认 False)。 如果为 True，则网络将展开，否则将使用符号循环。 展开可以加速 RNN，但它往往会占用更多的内存。 展开只适用于短序列。
+
+----------
+
+[[source]](https://github.com/keras-team/keras/blob/master/keras/layers/recurrent.py#L1524)
+
+### GRU
+
+```
+keras.layers.GRU(units, activation='tanh', recurrent_activation='sigmoid', use_bias=True, kernel_initializer='glorot_uniform', recurrent_initializer='orthogonal', bias_initializer='zeros', kernel_regularizer=None, recurrent_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, recurrent_constraint=None, bias_constraint=None, dropout=0.0, recurrent_dropout=0.0, implementation=2, return_sequences=False, return_state=False, go_backwards=False, stateful=False, unroll=False, reset_after=False)
+```
+
+门限循环单元网络（Gated Recurrent Unit） - Cho et al. 2014.
+
+有两种变体。默认的是基于 1406.1078v3 的实现，同时在矩阵乘法之前将复位门应用于隐藏状态。 另一种则是基于 1406.1078v1 的实现，它包括顺序倒置的操作。
+
+第二种变体与 CuDNNGRU(GPU-only) 兼容并且允许在 CPU 上进行推理。 因此它对于 `kernel` 和 `recurrent_kernel` 有可分离偏置。 使用 `'reset_after'=True` 和 `recurrent_activation='sigmoid'` 。
+
+**参数**
+
+-   **units**: 正整数，输出空间的维度。
+-   **activation**: 要使用的激活函数 (详见 [activations](https://keras-zh.readthedocs.io/activations/))。 默认：双曲正切 (`tanh`)。 如果传入 `None`，则不使用激活函数 (即 线性激活：`a(x) = x`)。
+-   **recurrent_activation**: 用于循环时间步的激活函数 (详见 [activations](https://keras-zh.readthedocs.io/activations/))。 默认：分段线性近似 sigmoid (`hard_sigmoid`)。 如果传入 None，则不使用激活函数 (即 线性激活：`a(x) = x`)。
+-   **use_bias**: 布尔值，该层是否使用偏置向量。
+-   **kernel_initializer**: `kernel` 权值矩阵的初始化器， 用于输入的线性转换 (详见 [initializers](https://keras-zh.readthedocs.io/initializers/))。
+-   **recurrent_initializer**: `recurrent_kernel` 权值矩阵 的初始化器，用于循环层状态的线性转换 (详见 [initializers](https://keras-zh.readthedocs.io/initializers/))。
+-   **bias_initializer**:偏置向量的初始化器 (详见[initializers](https://keras-zh.readthedocs.io/initializers/)).
+-   **kernel_regularizer**: 运用到 `kernel` 权值矩阵的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **recurrent_regularizer**: 运用到 `recurrent_kernel` 权值矩阵的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **bias_regularizer**: 运用到偏置向量的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **activity_regularizer**: 运用到层输出（它的激活值）的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **kernel_constraint**: 运用到 `kernel` 权值矩阵的约束函数 (详见 [constraints](https://keras-zh.readthedocs.io/constraints/))。
+-   **recurrent_constraint**: 运用到 `recurrent_kernel` 权值矩阵的约束函数 (详见 [constraints](https://keras-zh.readthedocs.io/constraints/))。
+-   **bias_constraint**: 运用到偏置向量的约束函数 (详见 [constraints](https://keras-zh.readthedocs.io/constraints/))。
+-   **dropout**: 在 0 和 1 之间的浮点数。 单元的丢弃比例，用于输入的线性转换。
+-   **recurrent_dropout**: 在 0 和 1 之间的浮点数。 单元的丢弃比例，用于循环层状态的线性转换。
+-   **implementation**: 实现模式，1 或 2。 模式 1 将把它的操作结构化为更多的小的点积和加法操作， 而模式 2 将把它们分批到更少，更大的操作中。 这些模式在不同的硬件和不同的应用中具有不同的性能配置文件。
+-   **return_sequences**: 布尔值。是返回输出序列中的最后一个输出，还是全部序列。
+-   **return_state**: 布尔值。除了输出之外是否返回最后一个状态。
+-   **go_backwards**: 布尔值 (默认 False)。 如果为 True，则向后处理输入序列并返回相反的序列。
+-   **stateful**: 布尔值 (默认 False)。 如果为 True，则批次中索引 i 处的每个样品的最后状态 将用作下一批次中索引 i 样品的初始状态。
+-   **unroll**: 布尔值 (默认 False)。 如果为 True，则网络将展开，否则将使用符号循环。 展开可以加速 RNN，但它往往会占用更多的内存。 展开只适用于短序列。
+-   **reset_after**:
+-   GRU 公约 (是否在矩阵乘法之前或者之后使用重置门)。 False =「之前」(默认)，Ture =「之后」( CuDNN 兼容)。
+
+**参考文献**
+
+-   [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation](https://arxiv.org/abs/1406.1078)
+-   [On the Properties of Neural Machine Translation: Encoder-Decoder Approaches](https://arxiv.org/abs/1409.1259)
+-   [Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling](http://arxiv.org/abs/1412.3555v1)
+-   [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
+
+----------
+
+[[source]](https://github.com/keras-team/keras/blob/master/keras/layers/recurrent.py#L2086)
+
+### LSTM
+
+```py
+keras.layers.LSTM(units, activation='tanh', 
+recurrent_activation='sigmoid', use_bias=True, 
+kernel_initializer='glorot_uniform', 
+recurrent_initializer='orthogonal', bias_initializer='zeros', 
+unit_forget_bias=True, kernel_regularizer=None, 
+recurrent_regularizer=None, bias_regularizer=None, 
+activity_regularizer=None, kernel_constraint=None, 
+recurrent_constraint=None, bias_constraint=None, dropout=0.0, 
+recurrent_dropout=0.0, implementation=2, 
+return_sequences=False, return_state=False, 
+go_backwards=False, stateful=False, unroll=False)
+```
+
+长短期记忆网络层（Long Short-Term Memory） - Hochreiter 1997.
+
+**参数**
+
+-   **units**: 正整数，输出空间的维度。
+-   **activation**: 要使用的激活函数 (详见 [activations](https://keras-zh.readthedocs.io/activations/))。 如果传入 `None`，则不使用激活函数 (即 线性激活：`a(x) = x`)。
+-   **recurrent_activation**: 用于循环时间步的激活函数 (详见 [activations](https://keras-zh.readthedocs.io/activations/))。 默认：分段线性近似 sigmoid (`hard_sigmoid`)。 如果传入 `None`，则不使用激活函数 (即 线性激活：`a(x) = x`)。
+-   **use_bias**: 布尔值，该层是否使用偏置向量。
+-   **kernel_initializer**: `kernel` 权值矩阵的初始化器， 用于输入的线性转换 (详见 [initializers](https://keras-zh.readthedocs.io/initializers/))。
+-   **recurrent_initializer**: `recurrent_kernel` 权值矩阵 的初始化器，用于循环层状态的线性转换 (详见 [initializers](https://keras-zh.readthedocs.io/initializers/))。
+-   **bias_initializer**:偏置向量的初始化器 (详见[initializers](https://keras-zh.readthedocs.io/initializers/)).
+-   **unit_forget_bias**: 布尔值。 如果为 True，初始化时，将忘记门的偏置加 1。 将其设置为 True 同时还会强制 `bias_initializer="zeros"`。 这个建议来自 [Jozefowicz et al. (2015)](http://www.jmlr.org/proceedings/papers/v37/jozefowicz15.pdf)。
+-   **kernel_regularizer**: 运用到 `kernel` 权值矩阵的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **recurrent_regularizer**: 运用到 `recurrent_kernel` 权值矩阵的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **bias_regularizer**: 运用到偏置向量的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **activity_regularizer**: 运用到层输出（它的激活值）的正则化函数 (详见 [regularizer](https://keras-zh.readthedocs.io/regularizers/))。
+-   **kernel_constraint**: 运用到 `kernel` 权值矩阵的约束函数 (详见 [constraints](https://keras-zh.readthedocs.io/constraints/))。
+-   **recurrent_constraint**: 运用到 `recurrent_kernel` 权值矩阵的约束函数 (详见 [constraints](https://keras-zh.readthedocs.io/constraints/))。
+-   **bias_constraint**: 运用到偏置向量的约束函数 (详见 [constraints](https://keras-zh.readthedocs.io/constraints/))。
+-   **dropout**: 在 0 和 1 之间的浮点数。 单元的丢弃比例，用于输入的线性转换。
+-   **recurrent_dropout**: 在 0 和 1 之间的浮点数。 单元的丢弃比例，用于循环层状态的线性转换。
+-   **implementation**: 实现模式，1 或 2。 模式 1 将把它的操作结构化为更多的小的点积和加法操作， 而模式 2 将把它们分批到更少，更大的操作中。 这些模式在不同的硬件和不同的应用中具有不同的性能配置文件。
+-   **return_sequences**: 布尔值。是返回输出序列中的最后一个输出，还是全部序列。
+-   **return_state**: 布尔值。除了输出之外是否返回最后一个状态。状态列表的返回元素分别是隐藏状态和单元状态。
+-   **go_backwards**: 布尔值 (默认 False)。 如果为 True，则向后处理输入序列并返回相反的序列。
+-   **stateful**: 布尔值 (默认 False)。 如果为 True，则批次中索引 i 处的每个样品的最后状态 将用作下一批次中索引 i 样品的初始状态。
+-   **unroll**: 布尔值 (默认 False)。 如果为 True，则网络将展开，否则将使用符号循环。 展开可以加速 RNN，但它往往会占用更多的内存。 展开只适用于短序列。
+
+**参考文献**
+
+-   [Long short-term memory](http://www.bioinf.jku.at/publications/older/2604.pdf)
+-   [Learning to forget: Continual prediction with LSTM](http://www.mitpressjournals.org/doi/pdf/10.1162/089976600300015015)
+-   [Supervised sequence labeling with recurrent neural networks](http://www.cs.toronto.edu/~graves/preprint.pdf)
+-   [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](http://arxiv.org/abs/1512.05287)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzMDQwNjUzMSw3MTI2MTgwMDgsODU2OT
+eyJoaXN0b3J5IjpbLTI5Nzg3MDgyOSw3MTI2MTgwMDgsODU2OT
 cyMDQzLDIxMDgxMTA1MzBdfQ==
 -->

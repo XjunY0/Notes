@@ -174,19 +174,28 @@ print(f"{word} ({flag})")
 ~~~scss
 我 (r) 
 爱 (v) 
-自然语言处理 (nz) ， (x) 特别 (d) 是 (v) 使用 (v) jieba (eng) 进行 (v) 分词 (v) 。 (x)
+自然语言处理 (nz) 
+， (x) 
+特别 (d) 
+是 (v) 
+使用 (v) 
+jieba (eng) 
+进行 (v) 
+分词 (v) 
+。 (x)
 ~~~
 ### 7. 并行分词
 
 `jieba` 还支持并行分词，可以在多核 CPU 下加快分词速度：
 
-py
 
-复制代码
-
-`jieba.enable_parallel(4)  # 开启并行分词，参数为并行进程数  seg_list = jieba.cut(text, cut_all=False) print("并行分词:", "/ ".join(seg_list))  jieba.disable_parallel()  # 关闭并行分词`
+~~~py
+jieba.enable_parallel(4)  # 开启并行分词，参数为并行进程数  seg_list = 
+jieba.cut(text, cut_all=False) print("并行分词:", "/ ".join(seg_list))  
+jieba.disable_parallel()  # 关闭并行分词
+~~~
 
 通过这些示例，您可以看到 `jieba` 的强大功能和灵活性，可以满足不同场景下的中文分词需求。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzOTIwMjc2OTEsMTU3MDAyMjI1NF19
+eyJoaXN0b3J5IjpbMTEzODAyMDQzMiwxNTcwMDIyMjU0XX0=
 -->

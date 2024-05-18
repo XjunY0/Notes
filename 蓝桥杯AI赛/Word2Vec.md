@@ -30,12 +30,9 @@ sentences = [     ["I", "love", "machine", "learning"],     ["Gensim", "is", "a"
     
 4.  **训练 Word2Vec 模型**
     
-    python
-    
-    复制代码
-    
-    `model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)`
-    
+~~~py
+model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)
+~~~
     这里的参数解释：
     
     -   `vector_size`：词向量的维度。
@@ -44,11 +41,7 @@ sentences = [     ["I", "love", "machine", "learning"],     ["Gensim", "is", "a"
     -   `workers`：使用的线程数。
 5.  **使用模型** 一旦模型训练完毕，我们可以使用它来获取词语的向量表示或寻找相似词语。例如：
     
-    python
-    
-    复制代码
-    
-    `# 获取词语 "machine" 的向量表示 vector = model.wv['machine'] print(vector)  # 找到与 "machine" 最相似的词语 similar_words = model.wv.most_similar('machine', topn=5) print(similar_words)`
+~# 获取词语 "machine" 的向量表示 vector = model.wv['machine'] print(vector)  # 找到与 "machine" 最相似的词语 similar_words = model.wv.most_similar('machine', topn=5) print(similar_words)`
     
 
 ### 示例解释
@@ -66,5 +59,5 @@ python
 
 通过这个示例，您可以了解如何使用 Word2Vec 将词语转换为向量，并进行相似词语的查找。这种技术在自然语言处理任务中非常有用，例如文本分类、聚类、推荐系统等。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTcyNDYwMDc2XX0=
+eyJoaXN0b3J5IjpbODI0MzM0ODE1XX0=
 -->

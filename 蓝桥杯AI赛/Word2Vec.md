@@ -119,49 +119,44 @@ seg_list = jieba.cut(text, cut_all=True) print("全模式:", "/ ".join(seg_list)
 seg_list = jieba.cut_for_search(text) 
 print("搜索引擎模式:", "/ ".join(seg_list))
 ~~~
-输出：
 
-makefile
-
-复制代码
-
-`搜索引擎模式: 我/ 爱/ 自然/ 语言/ 自然语言/ 处理`
+~~~makefile
+搜索引擎模式: 我/ 爱/ 自然/ 语言/ 自然语言/ 处理
+~~~
 
 ### 4. 自定义词典
 
 可以加载用户自定义的词典来补充 `jieba` 自带词典的不足。例如，我们希望把 "自然语言处理" 当作一个词来看待：
 
-py
 
-复制代码
-
-`jieba.load_userdict("mydict.txt")`
+~~~py
+jieba.load_userdict("mydict.txt")
+~~~
 
 `mydict.txt` 的内容可以是：
 
-复制代码
 
-`自然语言处理 10`
+~~~
+自然语言处理 10
+~~~
 
 其中 `10` 表示词频。
 
 ### 5. 关键词提取
 
 `jieba.analyse` 模块提供了关键词提取功能。它可以通过 TF-IDF 算法提取关键词：
-
-py
-
-复制代码
-
-`from jieba import analyse  text = "我爱自然语言处理，特别是使用jieba进行分词。" keywords = analyse.extract_tags(text, topK=5, withWeight=False) print("关键词:", keywords)`
+~~~py
+from jieba import analyse
+text = "我爱自然语言处理，特别是使用jieba进行分词。" 
+keywords = analyse.extract_tags(text, topK=5, withWeight=False) 
+print("关键词:", keywords)
+~~~
 
 输出：
 
-less
+~~~less
 
-复制代码
-
-`关键词: ['自然语言处理', '分词', '特别', '进行', '使用']`
+关键词: ['自然语言处理', '分词', '特别', '进行', '使用']`
 
 ### 6. 词性标注
 
@@ -193,5 +188,5 @@ py
 
 通过这些示例，您可以看到 `jieba` 的强大功能和灵活性，可以满足不同场景下的中文分词需求。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MjA4MjA4NjEsMTU3MDAyMjI1NF19
+eyJoaXN0b3J5IjpbMTY0NjQ2MDUxMywxNTcwMDIyMjU0XX0=
 -->

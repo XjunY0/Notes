@@ -1,3 +1,4 @@
+## Word2Vec
 Word2Vec 是一种将词语转换为向量的技术，它能够捕捉词语之间的语义关系。通过这种方式，机器可以理解并处理文本数据。Word2Vec 有两种主要的模型：**CBOW (Continuous Bag of Words)** 和 **Skip-gram**。
 
 ### 示例用法
@@ -11,23 +12,21 @@ Word2Vec 是一种将词语转换为向量的技术，它能够捕捉词语之�
 1.  **安装依赖包**
     
     
-~~~pip install gensim~~~
+~~~bash
+pip install gensim
+~~~
     
 2.  **导入所需的库**
     
-    python
-    
-    复制代码
-    
-    `from gensim.models import Word2Vec`
+~~~py
+from gensim.models import Word2Vec
+~~~
     
 3.  **准备训练数据** 通常，我们需要对文本进行预处理，包括分词等。假设我们有一个简单的句子列表作为我们的语料库：
     
-    python
-    
-    复制代码
-    
-    `sentences = [     ["I", "love", "machine", "learning"],     ["Gensim", "is", "a", "great", "tool"],     ["Word2Vec", "transforms", "words", "to", "vectors"],     ["Natural", "language", "processing", "is", "fun"] ]`
+~~~py
+sentences = [     ["I", "love", "machine", "learning"],     ["Gensim", "is", "a", "great", "tool"],     ["Word2Vec", "transforms", "words", "to", "vectors"],     ["Natural", "language", "processing", "is", "fun"] ]
+~~~
     
 4.  **训练 Word2Vec 模型**
     
@@ -67,5 +66,5 @@ python
 
 通过这个示例，您可以了解如何使用 Word2Vec 将词语转换为向量，并进行相似词语的查找。这种技术在自然语言处理任务中非常有用，例如文本分类、聚类、推荐系统等。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzg4NTQxMzhdfQ==
+eyJoaXN0b3J5IjpbNTcyNDYwMDc2XX0=
 -->

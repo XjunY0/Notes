@@ -68,6 +68,139 @@ for word, similarity in similar_words:
 	print(f"{word}: {similarity:.4f}")
 ~~~
 通过这个示例，您可以了解如何使用 Word2Vec 将词语转换为向量，并进行相似词语的查找。这种技术在自然语言处理任务中非常有用，例如文本分类、聚类、推荐系统等。
+
+## jieba
+`jieba` 是一个非常流行的中文分词工具，使用方便且功能强大。它支持三种分词模式：**精确模式**、**全模式** 和 **搜索引擎模式**。此外，`jieba` 还支持自定义词典和关键词提取。下面是一些常见用法的示例。
+首先，确保安装了 `jieba` 库：
+### 安装 jieba
+
+~~~bash
+pip install jieba
+~~~
+### 导入 jieba
+
+~~~py
+import jieba`
+
+### 1. 精确模式
+
+这是 `jieba` 的默认模式，会精确地切分句子，不存在冗余。适合文本分析。
+
+py
+
+复制代码
+
+`text = "我爱自然语言处理" seg_list = jieba.cut(text, cut_all=False) print("精确模式:", "/ ".join(seg_list))`
+
+输出：
+
+makefile
+
+复制代码
+
+`精确模式: 我/ 爱/ 自然/ 语言/ 处理`
+
+### 2. 全模式
+
+把句子中所有的可以成词的词语都扫描出来，有冗余。适合需要穷尽所有可能词语的情况。
+
+py
+
+复制代码
+
+`seg_list = jieba.cut(text, cut_all=True) print("全模式:", "/ ".join(seg_list))`
+
+输出：
+
+makefile
+
+复制代码
+
+`全模式: 我/ 爱/ 自然/ 自然语言/ 语言/ 处理`
+
+### 3. 搜索引擎模式
+
+在精确模式的基础上，对长词再次切分，提高召回率，适合用于搜索引擎构建索引。
+
+py
+
+复制代码
+
+`seg_list = jieba.cut_for_search(text) print("搜索引擎模式:", "/ ".join(seg_list))`
+
+输出：
+
+makefile
+
+复制代码
+
+`搜索引擎模式: 我/ 爱/ 自然/ 语言/ 自然语言/ 处理`
+
+### 4. 自定义词典
+
+可以加载用户自定义的词典来补充 `jieba` 自带词典的不足。例如，我们希望把 "自然语言处理" 当作一个词来看待：
+
+py
+
+复制代码
+
+`jieba.load_userdict("mydict.txt")`
+
+`mydict.txt` 的内容可以是：
+
+复制代码
+
+`自然语言处理 10`
+
+其中 `10` 表示词频。
+
+### 5. 关键词提取
+
+`jieba.analyse` 模块提供了关键词提取功能。它可以通过 TF-IDF 算法提取关键词：
+
+py
+
+复制代码
+
+`from jieba import analyse  text = "我爱自然语言处理，特别是使用jieba进行分词。" keywords = analyse.extract_tags(text, topK=5, withWeight=False) print("关键词:", keywords)`
+
+输出：
+
+less
+
+复制代码
+
+`关键词: ['自然语言处理', '分词', '特别', '进行', '使用']`
+
+### 6. 词性标注
+
+`jieba.posseg` 模块用于词性标注，可以标注每个词语的词性：
+
+py
+
+复制代码
+
+`import jieba.posseg as pseg  words = pseg.cut(text) for word, flag in words:     print(f"{word} ({flag})")`
+
+输出：
+
+scss
+
+复制代码
+
+`我 (r) 爱 (v) 自然语言处理 (nz) ， (x) 特别 (d) 是 (v) 使用 (v) jieba (eng) 进行 (v) 分词 (v) 。 (x)`
+
+### 7. 并行分词
+
+`jieba` 还支持并行分词，可以在多核 CPU 下加快分词速度：
+
+py
+
+复制代码
+
+`jieba.enable_parallel(4)  # 开启并行分词，参数为并行进程数  seg_list = jieba.cut(text, cut_all=False) print("并行分词:", "/ ".join(seg_list))  jieba.disable_parallel()  # 关闭并行分词`
+
+通过这些示例，您可以看到 `jieba` 的强大功能和灵活性，可以满足不同场景下的中文分词需求。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU3MDAyMjI1NF19
+eyJoaXN0b3J5IjpbLTE1NTg0ODIxNjUsMTU3MDAyMjI1NF19
 -->

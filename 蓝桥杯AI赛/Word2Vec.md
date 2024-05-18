@@ -80,54 +80,45 @@ pip install jieba
 ### 导入 jieba
 
 ~~~py
-import jieba`
+import jieba
+~~~
 
 ### 1. 精确模式
 
 这是 `jieba` 的默认模式，会精确地切分句子，不存在冗余。适合文本分析。
 
-py
 
-复制代码
+~~~py
+text = "我爱自然语言处理" seg_list = jieba.cut(text, 
+cut_all=False) print("精确模式:", "/ ".join(seg_list))
+~~~
 
-`text = "我爱自然语言处理" seg_list = jieba.cut(text, cut_all=False) print("精确模式:", "/ ".join(seg_list))`
-
-输出：
-
-makefile
-
-复制代码
-
-`精确模式: 我/ 爱/ 自然/ 语言/ 处理`
+~~~makefile
+精确模式: 我/ 爱/ 自然/ 语言/ 处理
+~~~
 
 ### 2. 全模式
 
 把句子中所有的可以成词的词语都扫描出来，有冗余。适合需要穷尽所有可能词语的情况。
 
-py
 
-复制代码
-
-`seg_list = jieba.cut(text, cut_all=True) print("全模式:", "/ ".join(seg_list))`
-
+~~~py
+seg_list = jieba.cut(text, cut_all=True) print("全模式:", "/ ".join(seg_list))
+~~~
 输出：
 
-makefile
 
-复制代码
-
-`全模式: 我/ 爱/ 自然/ 自然语言/ 语言/ 处理`
+~~~makefile
+全模式: 我/ 爱/ 自然/ 自然语言/ 语言/ 处理
+~~~
 
 ### 3. 搜索引擎模式
 
 在精确模式的基础上，对长词再次切分，提高召回率，适合用于搜索引擎构建索引。
-
-py
-
-复制代码
-
-`seg_list = jieba.cut_for_search(text) print("搜索引擎模式:", "/ ".join(seg_list))`
-
+~~~py
+seg_list = jieba.cut_for_search(text) 
+print("搜索引擎模式:", "/ ".join(seg_list))
+~~~
 输出：
 
 makefile
@@ -202,5 +193,5 @@ py
 
 通过这些示例，您可以看到 `jieba` 的强大功能和灵活性，可以满足不同场景下的中文分词需求。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NTg0ODIxNjUsMTU3MDAyMjI1NF19
+eyJoaXN0b3J5IjpbLTE4MjA4MjA4NjEsMTU3MDAyMjI1NF19
 -->

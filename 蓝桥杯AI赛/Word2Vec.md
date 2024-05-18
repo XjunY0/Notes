@@ -155,7 +155,6 @@ print("关键词:", keywords)
 输出：
 
 ~~~less
-
 关键词: ['自然语言处理', '分词', '特别', '进行', '使用']
 ~~~
 
@@ -163,20 +162,20 @@ print("关键词:", keywords)
 
 `jieba.posseg` 模块用于词性标注，可以标注每个词语的词性：
 
-py
 
-复制代码
-
-`import jieba.posseg as pseg  words = pseg.cut(text) for word, flag in words:     print(f"{word} ({flag})")`
+~~~py
+import jieba.posseg as pseg  
+words = pseg.cut(text) for word, flag in words:     
+print(f"{word} ({flag})")
+~~~
 
 输出：
 
-scss
-
-复制代码
-
-`我 (r) 爱 (v) 自然语言处理 (nz) ， (x) 特别 (d) 是 (v) 使用 (v) jieba (eng) 进行 (v) 分词 (v) 。 (x)`
-
+~~~scss
+我 (r) 
+爱 (v) 
+自然语言处理 (nz) ， (x) 特别 (d) 是 (v) 使用 (v) jieba (eng) 进行 (v) 分词 (v) 。 (x)
+~~~
 ### 7. 并行分词
 
 `jieba` 还支持并行分词，可以在多核 CPU 下加快分词速度：
@@ -189,5 +188,5 @@ py
 
 通过这些示例，您可以看到 `jieba` 的强大功能和灵活性，可以满足不同场景下的中文分词需求。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjEwNzU5NzY1LDE1NzAwMjIyNTRdfQ==
+eyJoaXN0b3J5IjpbLTEzOTIwMjc2OTEsMTU3MDAyMjI1NF19
 -->

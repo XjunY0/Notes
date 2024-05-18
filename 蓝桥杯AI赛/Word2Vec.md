@@ -41,8 +41,9 @@ model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)
     -   `workers`：使用的线程数。
 5.  **使用模型** 一旦模型训练完毕，我们可以使用它来获取词语的向量表示或寻找相似词语。例如：
     
-~# 获取词语 "machine" 的向量表示 vector = model.wv['machine'] print(vector)  # 找到与 "machine" 最相似的词语 similar_words = model.wv.most_similar('machine', topn=5) print(similar_words)`
-    
+~~~py
+# 获取词语 "machine" 的向量表示 vector = model.wv['machine'] print(vector)  # 找到与 "machine" 最相似的词语 similar_words = model.wv.most_similar('machine', topn=5) print(similar_words)
+~~~
 
 ### 示例解释
 
@@ -51,13 +52,22 @@ model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)
 
 ### 完整代码示例
 
-python
-
-复制代码
-
-`from gensim.models import Word2Vec  # 示例语料库 sentences = [     ["I", "love", "machine", "learning"],     ["Gensim", "is", "a", "great", "tool"],     ["Word2Vec", "transforms", "words", "to", "vectors"],     ["Natural", "language", "processing", "is", "fun"] ]  # 训练 Word2Vec 模型 model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)  # 获取词语 "machine" 的向量表示 vector = model.wv['machine'] print("Vector representation of 'machine':\n", vector)  # 找到与 "machine" 最相似的词语 similar_words = model.wv.most_similar('machine', topn=5) print("\nWords most similar to 'machine':") for word, similarity in similar_words:     print(f"{word}: {similarity:.4f}")`
-
+~~~py
+from gensim.models import Word2Vec  
+# 示例语料库 
+sentences = [     ["I", "love", "machine", "learning"],     ["Gensim", "is", "a", "great", "tool"],     ["Word2Vec", "transforms", "words", "to", "vectors"],     ["Natural", "language", "processing", "is", "fun"] ]  
+# 训练 Word2Vec 模型 
+model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)  
+# 获取词语 "machine" 的向量表示 
+vector = model.wv['machine'] 
+print("Vector representation of 'machine':\n", vector)  
+# 找到与 "machine" 最相似的词语 
+similar_words = model.wv.most_similar('machine', topn=5) 
+print("\nWords most similar to 'machine':") 
+for word, similarity in similar_words:     
+	print(f"{word}: {similarity:.4f}")
+~~~
 通过这个示例，您可以了解如何使用 Word2Vec 将词语转换为向量，并进行相似词语的查找。这种技术在自然语言处理任务中非常有用，例如文本分类、聚类、推荐系统等。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODI0MzM0ODE1XX0=
+eyJoaXN0b3J5IjpbMTU3MDAyMjI1NF19
 -->

@@ -156,7 +156,8 @@ print("关键词:", keywords)
 
 ~~~less
 
-关键词: ['自然语言处理', '分词', '特别', '进行', '使用']`
+关键词: ['自然语言处理', '分词', '特别', '进行', '使用']
+~~~
 
 ### 6. 词性标注
 
@@ -188,5 +189,5 @@ py
 
 通过这些示例，您可以看到 `jieba` 的强大功能和灵活性，可以满足不同场景下的中文分词需求。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY0NjQ2MDUxMywxNTcwMDIyMjU0XX0=
+eyJoaXN0b3J5IjpbNjEwNzU5NzY1LDE1NzAwMjIyNTRdfQ==
 -->

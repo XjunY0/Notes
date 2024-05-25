@@ -89,8 +89,8 @@ import jieba
 
 
 ~~~py
-text = "我爱自然语言处理" seg_list = jieba.cut(text, 
-cut_all=False) print("精确模式:", "/ ".join(seg_list))
+text = "我爱自然语言处理" 
+seg_list = jieba.cut(text, cut_all=False) print("精确模式:", "/ ".join(seg_list))
 ~~~
 
 ~~~makefile
@@ -197,5 +197,6 @@ jieba.disable_parallel()  # 关闭并行分词
 
 通过这些示例，您可以看到 `jieba` 的强大功能和灵活性，可以满足不同场景下的中文分词需求。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEzODAyMDQzMiwxNTcwMDIyMjU0XX0=
+eyJoaXN0b3J5IjpbMTAxOTY4MTE5NiwxMTM4MDIwNDMyLDE1Nz
+AwMjIyNTRdfQ==
 -->
